@@ -80,3 +80,9 @@ __recovery/
 
 # Boss dependency manager vendor folder https://github.com/HashLoad/boss
 modules/
+/Configuracoes/Bin/Docs
+Configuracoes/Configuracoes.ini
+/MCP-Server/Bin/Docs
+/MCP-Server/Bin/pdf
+Schemas/Configuracoes.ini
+*.ini

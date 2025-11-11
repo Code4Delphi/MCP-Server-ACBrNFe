@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{53EF9E4A-B28E-42B6-9D63-7D0A80DF9F29}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Configuracoes\ACBrNFe_Configuracoes.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="MCP-Server\ACBrNFe_MCP.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ACBrNFe_Configuracoes">
+        <MSBuild Projects="Configuracoes\ACBrNFe_Configuracoes.dproj"/>
+    </Target>
+    <Target Name="ACBrNFe_Configuracoes:Clean">
+        <MSBuild Projects="Configuracoes\ACBrNFe_Configuracoes.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ACBrNFe_Configuracoes:Make">
+        <MSBuild Projects="Configuracoes\ACBrNFe_Configuracoes.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ACBrNFe_MCP">
+        <MSBuild Projects="MCP-Server\ACBrNFe_MCP.dproj"/>
+    </Target>
+    <Target Name="ACBrNFe_MCP:Clean">
+        <MSBuild Projects="MCP-Server\ACBrNFe_MCP.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ACBrNFe_MCP:Make">
+        <MSBuild Projects="MCP-Server\ACBrNFe_MCP.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ACBrNFe_Configuracoes;ACBrNFe_MCP"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ACBrNFe_Configuracoes:Clean;ACBrNFe_MCP:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ACBrNFe_Configuracoes:Make;ACBrNFe_MCP:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
