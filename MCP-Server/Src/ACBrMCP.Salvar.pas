@@ -39,7 +39,8 @@ procedure TACBrMCPSalvar.GravarNFeNoBanco;
 begin
   FDm.QNFeGet('');
   FDm.QNFe.Append;
-
+  FDm.QNFeserie.AsInteger := FACBrNFe.NotasFiscais.Items[0].NFe.Ide.serie;
+  FDm.QNFenumero.AsInteger := FACBrNFe.NotasFiscais.Items[0].NFe.Ide.nNF;
   FDm.QNFechave.AsString := FACBrNFe.NotasFiscais.Items[0].NFe.procNFe.chNFe;
   FDm.QNFexml_arquivo.AsString := ExtractFileName(FACBrNFe.NotasFiscais.Items[0].NomeArq);
   FDm.QNFe.Post;

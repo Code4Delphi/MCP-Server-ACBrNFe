@@ -6,11 +6,13 @@ object DatabaseDm: TDatabaseDm
     Params.Strings = (
       'Database=C:\IA\MCP-Server-ACBrNFe\BD\dados_acbr.db'
       'DriverID=SQLite')
+    Connected = True
     LoginPrompt = False
     Left = 128
     Top = 88
   end
   object QNFe: TFDQuery
+    Active = True
     Connection = FDConnection1
     SQL.Strings = (
       'select *'
@@ -22,6 +24,14 @@ object DatabaseDm: TDatabaseDm
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = False
+    end
+    object QNFeserie: TIntegerField
+      FieldName = 'serie'
+      Origin = 'serie'
+    end
+    object QNFenumero: TIntegerField
+      FieldName = 'numero'
+      Origin = 'numero'
     end
     object QNFechave: TWideStringField
       FieldName = 'chave'

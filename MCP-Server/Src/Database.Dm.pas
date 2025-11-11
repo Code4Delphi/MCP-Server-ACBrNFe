@@ -48,6 +48,8 @@ type
     QPessoascMun: TIntegerField;
     QPessoasxMun: TWideStringField;
     QPessoasUF: TWideStringField;
+    QNFeserie: TIntegerField;
+    QNFenumero: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     FSqlPessoas: string;
