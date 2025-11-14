@@ -1318,7 +1318,7 @@ object MainView: TMainView
           TabOrder = 4
         end
         object cbEmailSSL: TCheckBox
-          Left = 3
+          Left = 8
           Top = 171
           Width = 167
           Height = 17
@@ -1333,7 +1333,7 @@ object MainView: TMainView
           TabOrder = 6
         end
         object cbEmailTLS: TCheckBox
-          Left = 10
+          Left = 8
           Top = 194
           Width = 167
           Height = 17

@@ -327,8 +327,6 @@ const
 
 {$R *.dfm}
 
-{ TfrmACBrNFe }
-
 procedure TMainView.ACBrNFe1GerarLog(const ALogLine: string;
   var Tratado: Boolean);
 begin
@@ -2035,7 +2033,7 @@ begin
   else
      Dir := TEdit(Sender).Text;
 
-  if SelectDirectory(Dir, [sdAllowCreate, sdPerformCreate, sdPrompt],SELDIRHELP) then
+  if SelectDirectory(Dir, [sdAllowCreate, sdPerformCreate, sdPrompt], SELDIRHELP) then
     TEdit(Sender).Text := Dir;
 end;
 

@@ -68,6 +68,9 @@ implementation
 
 procedure TDatabaseDm.DataModuleCreate(Sender: TObject);
 begin
+  FDConnection1.Connected := False;
+  FDConnection1.Params.Database := '..\..\BD\dados_acbr.db';
+
   FSqlPessoas := QPessoas.SQL.Text;
   FSqlQNFe := QNFe.SQL.Text;
 end;

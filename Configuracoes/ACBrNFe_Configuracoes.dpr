@@ -10,6 +10,7 @@ uses
 
 begin
   Application.Initialize;
+  Application.Title := 'Config MCP ACBrNFe';
   Application.CreateForm(TMainView, MainView);
   Application.CreateForm(TSelecionarCertificadosView, SelecionarCertificadosView);
   Application.CreateForm(TStatusView, StatusView);

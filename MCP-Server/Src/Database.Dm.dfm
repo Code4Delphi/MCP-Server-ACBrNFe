@@ -6,13 +6,11 @@ object DatabaseDm: TDatabaseDm
     Params.Strings = (
       'Database=C:\IA\MCP-Server-ACBrNFe\BD\dados_acbr.db'
       'DriverID=SQLite')
-    Connected = True
     LoginPrompt = False
     Left = 128
     Top = 88
   end
   object QNFe: TFDQuery
-    Active = True
     Connection = FDConnection1
     SQL.Strings = (
       'select *'
