@@ -125,9 +125,6 @@
         <DCCReference Include="Src\SelecionarCertificados.View.pas">
             <Form>SelecionarCertificadosView</Form>
         </DCCReference>
-        <DCCReference Include="Src\Status.View.pas">
-            <Form>StatusView</Form>
-        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

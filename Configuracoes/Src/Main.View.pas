@@ -299,7 +299,6 @@ uses
   ACBrDFeUtil,
   ACBrNFeNotasFiscais,
   ACBrNFeConfiguracoes,
-  Status.View,
   SelecionarCertificados.View;
 
 const
