@@ -191,6 +191,7 @@
         </DCCReference>
         <DCCReference Include="Src\ACBrMCP.Salvar.pas"/>
         <DCCReference Include="Src\ACBrMCP.Destinatario.pas"/>
+        <DCCReference Include="Src\InfRespTec.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

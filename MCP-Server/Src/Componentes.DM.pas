@@ -26,7 +26,8 @@ uses
   ACBrBase,
   ACBrDFe,
   ACBrNFe,
-  Emitente;
+  Emitente,
+  InfRespTec;
 
 type
   TComponentesDM = class(TDataModule)
@@ -152,6 +153,12 @@ begin
     LEmitente.Cidade := Ini.ReadString('Emitente', 'Cidade',      '');
     LEmitente.UF := Ini.ReadString('Emitente', 'UF',          '');
     LEmitente.CRT := Ini.ReadInteger('Emitente', 'CRT', 2);
+
+    var LInfRespTec := TInfRespTec.GetInstance;
+    LInfRespTec.CNPJ := Ini.ReadString('infRespTec', 'CNPJ', '');
+    LInfRespTec.xContato := Ini.ReadString('infRespTec', 'xContato', '');
+    LInfRespTec.Email := Ini.ReadString('infRespTec', 'Email', '');
+    LInfRespTec.Fone := Ini.ReadString('infRespTec', 'Fone', '');
 
     Self.ConfigurarEmail(Ini);
   finally

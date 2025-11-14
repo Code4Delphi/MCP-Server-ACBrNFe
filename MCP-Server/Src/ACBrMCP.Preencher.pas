@@ -21,6 +21,7 @@ uses
   pcnConversaoNFe,
   Componentes.DM,
   Emitente,
+  InfRespTec,
   ACBrMCP.Destinatario;
 
 type
@@ -28,6 +29,7 @@ type
   private
     FACBrNFe: TACBrNFe;
     FEmitente: TEmitente;
+    FInfRespTec: TInfRespTec;
     FNumero: Integer;
     FGerarCamposReformaTributaria: Boolean;
     FDestinatario: TDestinatario;
@@ -47,6 +49,7 @@ constructor TACBrMCPPreencher.Create;
 begin
   FACBrNFe := ComponentesDM.ACBrNFe1;
   FEmitente := TEmitente.GetInstance;
+  FInfRespTec := TInfRespTec.GetInstance;
   FGerarCamposReformaTributaria := False;
 end;
 
@@ -116,10 +119,10 @@ begin
   // Indicador de intermediador/marketplace
   NotaF.NFe.Ide.indIntermed := iiSemOperacao;
 
-  NotaF.NFe.infRespTec.CNPJ := '05.481.336/0001-37';
-  NotaF.NFe.infRespTec.xContato := 'César Cardoso';
-  NotaF.NFe.infRespTec.email := 'contato@code4delphi.com.br';
-  NotaF.NFe.infRespTec.fone := '43999123456';
+  NotaF.NFe.infRespTec.CNPJ := FInfRespTec.CNPJ;
+  NotaF.NFe.infRespTec.xContato := FInfRespTec.xContato;
+  NotaF.NFe.infRespTec.email := FInfRespTec.Email;
+  NotaF.NFe.infRespTec.fone := FInfRespTec.Fone;
 
   // Reforma Tributária
   if FGerarCamposReformaTributaria then

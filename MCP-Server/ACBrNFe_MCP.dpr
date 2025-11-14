@@ -12,7 +12,8 @@ uses
   ACBrMCP.Preencher in 'Src\ACBrMCP.Preencher.pas',
   Database.Dm in 'Src\Database.Dm.pas' {DatabaseDm: TDataModule},
   ACBrMCP.Salvar in 'Src\ACBrMCP.Salvar.pas',
-  ACBrMCP.Destinatario in 'Src\ACBrMCP.Destinatario.pas';
+  ACBrMCP.Destinatario in 'Src\ACBrMCP.Destinatario.pas',
+  InfRespTec in 'Src\InfRespTec.pas';
 
 var
   ServerMCP: TServer;
