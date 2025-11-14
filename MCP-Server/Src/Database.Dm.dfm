@@ -69,6 +69,11 @@ object DatabaseDm: TDatabaseDm
       Origin = 'xNome'
       Size = 80
     end
+    object QPessoasemail: TWideMemoField
+      FieldName = 'email'
+      Origin = 'email'
+      BlobType = ftWideMemo
+    end
     object QPessoasfone: TWideStringField
       FieldName = 'fone'
       Origin = 'fone'

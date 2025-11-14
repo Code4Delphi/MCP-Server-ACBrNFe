@@ -25,7 +25,7 @@ type
     FMsgRetorno: string;
     procedure OnServerLog(Sender: TObject; const LogMessage: string);
     function GerarNFe(const Args: array of TValue): TValue;
-    procedure EnviarNFePorEmail;
+    procedure EnviarNFePorEmail(const ADestinatario: TDestinatario);
     procedure GravarNFeNoBanco;
     procedure AddLog(const AMsg: string);
   public
@@ -155,15 +155,13 @@ begin
     end;
 
     try
-      Self.EnviarNFePorEmail;
+      Self.EnviarNFePorEmail(LDestinatario);
     except
       on E: Exception do
         Self.AddLog('- Não foi possível enviar o e-mail da nota gerada. Mensagem; ' + E.Message);
     end;
 
     Result := TValue.From<string>('Processo finalizado. '+ sLineBreak + FMsgRetorno.Trim);
-
-      //ComponentesDM.ACBrNFe1.NotasFiscais.Items[0].XML
   finally
     LDestinatario.Free;
   end;
@@ -187,19 +185,19 @@ begin
   end;
 end;
 
-procedure TServer.EnviarNFePorEmail;
+procedure TServer.EnviarNFePorEmail(const ADestinatario: TDestinatario);
 begin
   var LMsg := TStringList.Create;
   try
     LMsg.Add('Nota fiscal emitida ');
     LMsg.Add('Numero: ' + ComponentesDM.ACBrNFe1.NotasFiscais.Items[0].NFe.Ide.nNF.ToString);
-    LMsg.Add('Destinatario: ' + ComponentesDM.ACBrNFe1.NotasFiscais.Items[0].NFe.Dest.EnderDest.xCpl);
+    LMsg.Add('Destinatario: ' + ADestinatario.RazaoSocial); //ComponentesDM.ACBrNFe1.NotasFiscais.Items[0].NFe.Dest.EnderDest.xCpl);
     LMsg.Add('');
     LMsg.Add('Atenciosamente, Cesar Cardoso');
     LMsg.Add('Data e hora: ' + DateTimeToStr(Now));
 
     var LEnviaPDF := False;
-    ComponentesDM.ACBrNFe1.NotasFiscais.Items[0].EnviarEmail('contato@code4delphi.com.br',
+    ComponentesDM.ACBrNFe1.NotasFiscais.Items[0].EnviarEmail(ADestinatario.Email,
       'Enviado pelo MCP ACBr. NFe n.: ' + ComponentesDM.ACBrNFe1.NotasFiscais.Items[0].NFe.Ide.nNF.ToString,
       LMsg, LEnviaPDF, nil, nil);
   finally

@@ -17,6 +17,7 @@ type
     FIE: string;
     FRazaoSocial: string;
     FFantasia: string;
+    FEmail: string;
     FFone: string;
     FCEP: string;
     FLogradouro: string;
@@ -39,6 +40,7 @@ type
     property IE: string read FIE write FIE;
     property RazaoSocial: string read FRazaoSocial write FRazaoSocial;
     property Fantasia: string read FFantasia write FFantasia;
+    property Email: string read FEmail write FEmail;
     property Fone: string read FFone write FFone;
     property CEP: string read FCEP write FCEP;
     property Logradouro: string read FLogradouro write FLogradouro;
@@ -72,6 +74,7 @@ begin
   FIE := '';
   FRazaoSocial := '';
   FFantasia := '';
+  FEmail := '';
   FFone := '';
   FCEP := '';
   FLogradouro := '';
@@ -100,6 +103,7 @@ begin
   FIE := FDm.QPessoasIE.AsString;
   FRazaoSocial := FDm.QPessoasxNome.AsString;
   FFantasia := FDm.QPessoasxNome.AsString;
+  FEmail := FDm.QPessoasemail.AsString;
   FFone := FDm.QPessoasfone.AsString;
   FCEP := FDm.QPessoasCEP.AsString;
   FLogradouro := FDm.QPessoasxLgr.AsString;
