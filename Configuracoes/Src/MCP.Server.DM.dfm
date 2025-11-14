@@ -44,7 +44,6 @@ object MCPServerDM: TMCPServerDM
     MCPEndpoint = '/acbrnfe'
     ProtocolVersion = '2025-06-18'
     UseSSL = False
-    SSLVersion = sslvTLSv1_2
     Left = 376
     Top = 64
   end
