@@ -209,8 +209,8 @@ object MainView: TMainView
               end
             end
             object btnDataValidade: TButton
-              Left = 7
-              Top = 305
+              Left = 3
+              Top = 308
               Width = 99
               Height = 25
               Caption = 'Data de Validade'
@@ -1209,6 +1209,7 @@ object MainView: TMainView
               Top = 33
               Width = 248
               Height = 21
+              PasswordChar = '*'
               TabOrder = 0
             end
             object edtInfRespTecxContato: TEdit
@@ -1441,89 +1442,14 @@ object MainView: TMainView
     Height = 612
     Align = alClient
     TabOrder = 1
-    object pgcBotoes: TPageControl
-      Left = 1
-      Top = 41
-      Width = 567
-      Height = 197
-      ActivePage = tsEnvios
-      Align = alTop
-      TabOrder = 0
-      object tsEnvios: TTabSheet
-        Caption = 'Envios'
-        ImageIndex = 2
-        object btnCriarEnviar: TButton
-          Left = 3
-          Top = 20
-          Width = 177
-          Height = 25
-          Caption = 'Criar e Enviar'
-          TabOrder = 0
-          OnClick = btnCriarEnviarClick
-        end
-        object btnEnviarEmail: TButton
-          Left = 3
-          Top = 51
-          Width = 177
-          Height = 25
-          Caption = 'Enviar NFe Email'
-          TabOrder = 1
-          OnClick = btnEnviarEmailClick
-        end
-      end
-      object tsConsultas: TTabSheet
-        Caption = 'Consultas'
-        ImageIndex = 3
-        object btnStatusServ: TButton
-          Left = 8
-          Top = 9
-          Width = 177
-          Height = 25
-          Caption = ' Status de Servi'#231'o'
-          TabOrder = 0
-          OnClick = btnStatusServClick
-        end
-      end
-    end
     object pgRespostas: TPageControl
       Left = 1
-      Top = 238
+      Top = 1
       Width = 567
-      Height = 373
-      ActivePage = TabSheet5
+      Height = 610
+      ActivePage = TabSheet8
       Align = alClient
-      TabOrder = 1
-      object TabSheet5: TTabSheet
-        Caption = 'Respostas'
-        object MemoResp: TMemo
-          Left = 0
-          Top = 0
-          Width = 559
-          Height = 345
-          Align = alClient
-          ScrollBars = ssVertical
-          TabOrder = 0
-          ExplicitTop = -2
-        end
-      end
-      object TabSheet6: TTabSheet
-        Caption = 'XML Resposta'
-        ImageIndex = 1
-        object WBResposta: TWebBrowser
-          Left = 0
-          Top = 0
-          Width = 559
-          Height = 345
-          Align = alClient
-          TabOrder = 0
-          ControlData = {
-            4C000000C6390000A82300000000000000000000000000000000000000000000
-            000000004C000000000000000000000001000000E0D057007335CF11AE690800
-            2B2E126200000000000000004C0000000114020000000000C000000000000046
-            8000000000000000000000000000000000000000000000000000000000000000
-            00000000000000000100000000000000000000000000000000000000}
-        end
-      end
+      TabOrder = 0
       object TabSheet8: TTabSheet
         Caption = 'Log'
         ImageIndex = 2
@@ -1531,146 +1457,14 @@ object MainView: TMainView
           Left = 0
           Top = 0
           Width = 559
-          Height = 345
+          Height = 582
           Align = alClient
           ScrollBars = ssVertical
           TabOrder = 0
-        end
-      end
-      object TabSheet9: TTabSheet
-        Caption = 'Documento'
-        ImageIndex = 3
-        object trvwDocumento: TTreeView
-          Left = 0
-          Top = 0
-          Width = 559
-          Height = 345
-          Align = alClient
-          Indent = 19
-          TabOrder = 0
-        end
-      end
-      object TabSheet10: TTabSheet
-        Caption = 'Retorno Completo WS'
-        ImageIndex = 4
-        object memoRespWS: TMemo
-          Left = 0
-          Top = 0
-          Width = 559
-          Height = 345
-          Align = alClient
-          ScrollBars = ssVertical
-          TabOrder = 0
-        end
-      end
-      object Dados: TTabSheet
-        Caption = 'Dados'
-        ImageIndex = 5
-        object MemoDados: TMemo
-          Left = 0
-          Top = 0
-          Width = 559
-          Height = 345
-          Align = alClient
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Lucida Console'
-          Font.Style = []
-          Lines.Strings = (
-            '')
-          ParentFont = False
-          ScrollBars = ssVertical
-          TabOrder = 0
-          WordWrap = False
+          ExplicitLeft = 1
         end
       end
     end
-    object rgReformaTributaria: TRadioGroup
-      Left = 1
-      Top = 1
-      Width = 567
-      Height = 40
-      Align = alTop
-      Caption = 
-        'Gera os campos da ReformaTributaria (em conformidade com a NT 20' +
-        '25/002 vers'#227'o 1.30)'
-      Columns = 2
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ItemIndex = 1
-      Items.Strings = (
-        'Sim'
-        'N'#227'o')
-      ParentFont = False
-      TabOrder = 2
-    end
-  end
-  object ACBrNFe1: TACBrNFe
-    MAIL = ACBrMail1
-    OnStatusChange = ACBrNFe1StatusChange
-    OnGerarLog = ACBrNFe1GerarLog
-    Configuracoes.Geral.SSLLib = libNone
-    Configuracoes.Geral.SSLCryptLib = cryNone
-    Configuracoes.Geral.SSLHttpLib = httpNone
-    Configuracoes.Geral.SSLXmlSignLib = xsNone
-    Configuracoes.Geral.FormaEmissao = teContingencia
-    Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
-    Configuracoes.Geral.VersaoDF = ve200
-    Configuracoes.Geral.AtualizarXMLCancelado = True
-    Configuracoes.Geral.VersaoQRCode = veqr000
-    Configuracoes.Arquivos.OrdenacaoPath = <>
-    Configuracoes.WebServices.UF = 'SP'
-    Configuracoes.WebServices.AguardarConsultaRet = 15000
-    Configuracoes.WebServices.AjustaAguardaConsultaRet = True
-    Configuracoes.WebServices.TimeOut = 20000
-    Configuracoes.WebServices.QuebradeLinha = '|'
-    Configuracoes.RespTec.IdCSRT = 0
-    DANFE = ACBrNFeDANFeRL1
-    Left = 570
-    Top = 455
-  end
-  object ACBrNFeDANFeRL1: TACBrNFeDANFeRL
-    Sistema = 'Projeto ACBr - www.projetoacbr.com.br'
-    Usuario = 'ACBr'
-    MargemInferior = 0.700000000000000000
-    MargemSuperior = 0.700000000000000000
-    MargemEsquerda = 0.700000000000000000
-    MargemDireita = 0.700000000000000000
-    ExpandeLogoMarcaConfig.Altura = 0
-    ExpandeLogoMarcaConfig.Esquerda = 0
-    ExpandeLogoMarcaConfig.Topo = 0
-    ExpandeLogoMarcaConfig.Largura = 0
-    ExpandeLogoMarcaConfig.Dimensionar = False
-    ExpandeLogoMarcaConfig.Esticar = True
-    CasasDecimais.Formato = tdetInteger
-    CasasDecimais.qCom = 4
-    CasasDecimais.vUnCom = 4
-    CasasDecimais.MaskqCom = '###,###,###,##0.00'
-    CasasDecimais.MaskvUnCom = '###,###,###,##0.00'
-    CasasDecimais.Aliquota = 2
-    CasasDecimais.MaskAliquota = ',0.00'
-    ACBrNFe = ACBrNFe1
-    ExibeInforAdicProduto = infNenhum
-    ImprimeDetalhamentoEspecifico = False
-    ExibeResumoCanhoto = False
-    ExibeCampoFatura = False
-    Left = 667
-    Top = 455
-  end
-  object ACBrMail1: TACBrMail
-    Host = '127.0.0.1'
-    Port = '25'
-    SetSSL = False
-    SetTLS = False
-    Attempts = 3
-    DefaultCharset = UTF_8
-    IDECharset = CP1252
-    Left = 770
-    Top = 455
   end
   object OpenDialog1: TOpenDialog
     DefaultExt = '*-nfe.XML'
@@ -1680,5 +1474,19 @@ object MainView: TMainView
     Title = 'Selecione a NFe'
     Left = 563
     Top = 519
+  end
+  object ACBrNFe1: TACBrNFe
+    Configuracoes.Geral.SSLLib = libNone
+    Configuracoes.Geral.SSLCryptLib = cryNone
+    Configuracoes.Geral.SSLHttpLib = httpNone
+    Configuracoes.Geral.SSLXmlSignLib = xsNone
+    Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
+    Configuracoes.Arquivos.OrdenacaoPath = <>
+    Configuracoes.WebServices.UF = 'SP'
+    Configuracoes.WebServices.AguardarConsultaRet = 0
+    Configuracoes.WebServices.QuebradeLinha = '|'
+    Configuracoes.RespTec.IdCSRT = 0
+    Left = 424
+    Top = 312
   end
 end
