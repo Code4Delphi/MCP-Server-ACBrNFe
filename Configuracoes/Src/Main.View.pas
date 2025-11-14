@@ -247,6 +247,15 @@ type
     cbEmailTLS: TCheckBox;
     Label43: TLabel;
     edtSmtpFromEmail: TEdit;
+    TabSheet11: TTabSheet;
+    Label44: TLabel;
+    edtInfRespTecCNPJ: TEdit;
+    Label45: TLabel;
+    edtInfRespTecxContato: TEdit;
+    Label48: TLabel;
+    edtInfRespTecEmail: TEdit;
+    Label49: TLabel;
+    edtInfRespTecFone: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure btnSalvarConfigClick(Sender: TObject);
     procedure sbPathNFeClick(Sender: TObject);
@@ -1520,11 +1529,6 @@ begin
        }
 end;
 
-procedure TMainView.btnSalvarConfigClick(Sender: TObject);
-begin
-  Self.GravarConfiguracao;
-end;
-
 procedure TMainView.btnStatusServClick(Sender: TObject);
 begin
   ACBrNFe1.WebServices.StatusServico.Executar;
@@ -1662,6 +1666,11 @@ begin
   Result := '..\Configuracoes.ini';
 end;
 
+procedure TMainView.btnSalvarConfigClick(Sender: TObject);
+begin
+  Self.GravarConfiguracao;
+end;
+
 procedure TMainView.GravarConfiguracao;
 var
   IniFile: String;
@@ -1742,6 +1751,11 @@ begin
     Ini.WriteString('RespTecnico', 'IdCSRT', edtIdCSRT.Text);
     Ini.WriteString('RespTecnico', 'CSRT', edtCSRT.Text);
 
+    Ini.WriteString('infRespTec', 'CNPJ',  edtInfRespTecCNPJ.Text);
+    Ini.WriteString('infRespTec', 'xContato',  edtInfRespTecxContato.Text);
+    Ini.WriteString('infRespTec', 'Email',  edtInfRespTecEmail.Text);
+    Ini.WriteString('infRespTec', 'Fone',  edtInfRespTecFone.Text);
+
     Ini.WriteString('Email', 'Host',    edtSmtpHost.Text);
     Ini.WriteString('Email', 'Port',    edtSmtpPort.Text);
     Ini.WriteString('Email', 'User',    edtSmtpUser.Text);
@@ -1761,6 +1775,7 @@ begin
 
     Ini.WriteInteger('DANFE', 'Tipo',       rgTipoDanfe.ItemIndex);
     Ini.WriteString( 'DANFE', 'LogoMarca',  edtLogoMarca.Text);
+
     ConfigurarComponente;
     ConfigurarEmail;
   finally
@@ -1861,6 +1876,11 @@ begin
     // Responsável Técnico
     edtIdCSRT.Text := Ini.ReadString('RespTecnico', 'IdCSRT', '');
     edtCSRT.Text := Ini.ReadString('RespTecnico', 'CSRT', '');
+
+    edtInfRespTecCNPJ.Text := Ini.ReadString('infRespTec', 'CNPJ', '');
+    edtInfRespTecxContato.Text := Ini.ReadString('infRespTec', 'xContato', '');
+    edtInfRespTecEmail.Text := Ini.ReadString('infRespTec', 'Email', '');
+    edtInfRespTecFone.Text := Ini.ReadString('infRespTec', 'Fone', '');
 
     edtSmtpHost.Text     := Ini.ReadString('Email', 'Host',    '');
     edtSmtpPort.Text     := Ini.ReadString('Email', 'Port',    '');
@@ -2167,22 +2187,6 @@ begin
   Self.AlimentarComponente(ANumero);
 
   ACBrNFe1.Enviar('1', True, True)
-
-//  MemoResp.Lines.Text := ACBrNFe1.WebServices.Enviar.RetWS;
-//  memoRespWS.Lines.Text := ACBrNFe1.WebServices.Enviar.RetornoWS;
-//  LoadXML(ACBrNFe1.WebServices.Enviar.RetWS, WBResposta);
-//
-//  MemoDados.Lines.Add('');
-//  MemoDados.Lines.Add('Envio NFe/NFCe');
-//  MemoDados.Lines.Add('Chave: ' + ACBrNFe1.NotasFiscais[0].NFe.procNFe.chNFe);
-//  MemoDados.Lines.Add('tpAmb: ' + TpAmbToStr(ACBrNFe1.WebServices.Enviar.TpAmb));
-//  MemoDados.Lines.Add('verAplic: ' + ACBrNFe1.WebServices.Enviar.verAplic);
-//  MemoDados.Lines.Add('cStat: ' + IntToStr(ACBrNFe1.WebServices.Enviar.cStat));
-//  MemoDados.Lines.Add('cUF: ' + IntToStr(ACBrNFe1.WebServices.Enviar.cUF));
-//  MemoDados.Lines.Add('xMotivo: ' + ACBrNFe1.WebServices.Enviar.xMotivo);
-//  MemoDados.Lines.Add('Recibo: '+ ACBrNFe1.WebServices.Enviar.Recibo);
-//  MemoDados.Lines.Add('Protocolo: ' + ACBrNFe1.WebServices.Enviar.Protocolo);
-
 end;
 
 end.

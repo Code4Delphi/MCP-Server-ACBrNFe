@@ -34,7 +34,7 @@ object MainView: TMainView
           Top = 0
           Width = 287
           Height = 525
-          ActivePage = TabSheet12
+          ActivePage = TabSheet11
           Align = alClient
           MultiLine = True
           TabOrder = 0
@@ -500,13 +500,13 @@ object MainView: TMainView
               object Label6: TLabel
                 Left = 8
                 Top = 16
-                Width = 126
+                Width = 125
                 Height = 13
                 Caption = 'Selecione UF do Emitente:'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
-                Font.Name = 'MS Sans Serif'
+                Font.Name = 'Tahoma'
                 Font.Style = []
                 ParentFont = False
               end
@@ -546,7 +546,7 @@ object MainView: TMainView
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -13
-                Font.Name = 'MS Sans Serif'
+                Font.Name = 'Tahoma'
                 Font.Style = []
                 ItemIndex = 24
                 ParentFont = False
@@ -582,8 +582,8 @@ object MainView: TMainView
                   'TO')
               end
               object rgTipoAmb: TRadioGroup
-                Left = 8
-                Top = 61
+                Left = 13
+                Top = 60
                 Width = 249
                 Height = 52
                 Caption = 'Selecione o Ambiente de Destino'
@@ -857,7 +857,7 @@ object MainView: TMainView
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
-              Font.Name = 'MS Sans Serif'
+              Font.Name = 'Tahoma'
               Font.Style = []
               ParentFont = False
             end
@@ -963,7 +963,7 @@ object MainView: TMainView
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -13
-              Font.Name = 'MS Sans Serif'
+              Font.Name = 'Tahoma'
               Font.Style = []
               ParentFont = False
               TabOrder = 13
@@ -1171,6 +1171,66 @@ object MainView: TMainView
               Width = 235
               Height = 21
               TabOrder = 10
+            end
+          end
+          object TabSheet11: TTabSheet
+            Caption = 'infRespTec'
+            ImageIndex = 5
+            object Label44: TLabel
+              Left = 11
+              Top = 18
+              Width = 25
+              Height = 13
+              Caption = 'CNPJ'
+            end
+            object Label45: TLabel
+              Left = 11
+              Top = 66
+              Width = 39
+              Height = 13
+              Caption = 'Contato'
+            end
+            object Label48: TLabel
+              Left = 11
+              Top = 114
+              Width = 24
+              Height = 13
+              Caption = 'Email'
+            end
+            object Label49: TLabel
+              Left = 11
+              Top = 162
+              Width = 24
+              Height = 13
+              Caption = 'Fone'
+            end
+            object edtInfRespTecCNPJ: TEdit
+              Left = 11
+              Top = 33
+              Width = 248
+              Height = 21
+              TabOrder = 0
+            end
+            object edtInfRespTecxContato: TEdit
+              Left = 11
+              Top = 81
+              Width = 248
+              Height = 21
+              TabOrder = 1
+            end
+            object edtInfRespTecEmail: TEdit
+              Left = 11
+              Top = 129
+              Width = 248
+              Height = 21
+              TabOrder = 2
+            end
+            object edtInfRespTecFone: TEdit
+              Left = 11
+              Top = 177
+              Width = 248
+              Height = 21
+              TabOrder = 3
             end
           end
         end
@@ -1443,7 +1503,7 @@ object MainView: TMainView
           Align = alClient
           ScrollBars = ssVertical
           TabOrder = 0
-          ExplicitTop = 6
+          ExplicitTop = -2
         end
       end
       object TabSheet6: TTabSheet
