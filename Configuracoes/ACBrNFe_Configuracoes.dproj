@@ -128,11 +128,6 @@
         <DCCReference Include="Src\Status.View.pas">
             <Form>StatusView</Form>
         </DCCReference>
-        <DCCReference Include="Src\MCP.Server.DM.pas">
-            <Form>MCPServerDM</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -165,7 +160,7 @@
                 <Platform value="Win64">False</Platform>
             </Platforms>
             <Deployment Version="5">
-                <DeployFile LocalName="ACBrNFe_Configuracoes.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Bin\ACBrNFe_Configuracoes.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>ACBrNFe_Configuracoes.exe</RemoteName>
                         <Overwrite>true</Overwrite>

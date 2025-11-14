@@ -4,8 +4,7 @@ uses
   Forms,
   Main.View in 'Src\Main.View.pas' {MainView},
   SelecionarCertificados.View in 'Src\SelecionarCertificados.View.pas' {SelecionarCertificadosView},
-  Status.View in 'Src\Status.View.pas' {StatusView},
-  MCP.Server.DM in 'Src\MCP.Server.DM.pas' {MCPServerDM: TDataModule};
+  Status.View in 'Src\Status.View.pas' {StatusView};
 
 {$R *.res}
 

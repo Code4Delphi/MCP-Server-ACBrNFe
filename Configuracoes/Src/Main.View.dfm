@@ -1430,43 +1430,9 @@ object MainView: TMainView
       Top = 238
       Width = 567
       Height = 373
-      ActivePage = TabSheet11
+      ActivePage = TabSheet5
       Align = alClient
       TabOrder = 1
-      object TabSheet11: TTabSheet
-        Caption = 'MCP Log'
-        ImageIndex = 6
-        object mmMCPLog: TMemo
-          Left = 0
-          Top = 33
-          Width = 559
-          Height = 312
-          Align = alClient
-          Lines.Strings = (
-            '')
-          TabOrder = 0
-        end
-        object Panel1: TPanel
-          Left = 0
-          Top = 0
-          Width = 559
-          Height = 33
-          Align = alTop
-          BevelOuter = bvNone
-          TabOrder = 1
-          object btnMCPStart: TButton
-            AlignWithMargins = True
-            Left = 3
-            Top = 3
-            Width = 113
-            Height = 27
-            Align = alLeft
-            Caption = 'MCP Start'
-            TabOrder = 0
-            OnClick = btnMCPStartClick
-          end
-        end
-      end
       object TabSheet5: TTabSheet
         Caption = 'Respostas'
         object MemoResp: TMemo
@@ -1477,6 +1443,7 @@ object MainView: TMainView
           Align = alClient
           ScrollBars = ssVertical
           TabOrder = 0
+          ExplicitTop = 6
         end
       end
       object TabSheet6: TTabSheet

@@ -63,8 +63,7 @@ uses
   ShellAPI,
   XMLIntf,
   XMLDoc,
-  zlib,
-  MCP.Server.DM;
+  zlib;
 
 type
   TMainView = class(TForm)
@@ -243,10 +242,6 @@ type
     Label53: TLabel;
     cbVersaoQRCode: TComboBox;
     rgReformaTributaria: TRadioGroup;
-    TabSheet11: TTabSheet;
-    mmMCPLog: TMemo;
-    Panel1: TPanel;
-    btnMCPStart: TButton;
     MemoDados: TMemo;
     OpenDialog1: TOpenDialog;
     cbEmailTLS: TCheckBox;
@@ -277,10 +272,8 @@ type
     procedure btnEnviarEmailClick(Sender: TObject);
     procedure ACBrNFe1GerarLog(const ALogLine: string; var Tratado: Boolean);
     procedure sbPathPDFClick(Sender: TObject);
-    procedure btnMCPStartClick(Sender: TObject);
     procedure btnCriarEnviarClick(Sender: TObject);
   private
-    FMCPServerDM: TMCPServerDM;
     procedure GravarConfiguracao;
     procedure LerConfiguracao;
     procedure ConfigurarComponente;
@@ -289,8 +282,6 @@ type
     Procedure AlimentarComponente(const ANumero: Integer);
     procedure LoadXML(RetWS: String; MyWebBrowser: TWebBrowser);
     procedure AtualizarSSLLibsCombo;
-    procedure AddLogMCP(ALog: string);
-    procedure ConfigMCP;
     function GetFileNameConfiguracoesIni: string;
   public
     procedure CriarEEnviarNFe(const ANumero: Integer);
@@ -1617,8 +1608,6 @@ var
   Y: TSSLType;
   P: TpcnVersaoQrCode;
 begin
-  Self.ConfigMCP;
-
   cbSSLLib.Items.Clear;
   for T := Low(TSSLLib) to High(TSSLLib) do
     cbSSLLib.Items.Add( GetEnumName(TypeInfo(TSSLLib), integer(T) ) );
@@ -2162,22 +2151,6 @@ end;
 procedure TMainView.spPathSchemasClick(Sender: TObject);
 begin
   PathClick(edtPathSchemas);
-end;
-
-procedure TMainView.ConfigMCP;
-begin
-  FMCPServerDM := TMCPServerDM.Create(Self);
-  FMCPServerDM.OnLog := Self.AddLogMCP;
-end;
-
-procedure TMainView.AddLogMCP(ALog: string);
-begin
-  mmMCPLog.Lines.Add(ALog);
-end;
-
-procedure TMainView.btnMCPStartClick(Sender: TObject);
-begin
-  FMCPServerDM.Start;
 end;
 
 procedure TMainView.btnCriarEnviarClick(Sender: TObject);
