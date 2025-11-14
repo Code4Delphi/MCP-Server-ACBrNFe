@@ -415,8 +415,8 @@ object MainView: TMainView
                 TabOrder = 4
               end
               object edtFormatoAlerta: TEdit
-                Left = 8
-                Top = 66
+                Left = 3
+                Top = 61
                 Width = 248
                 Height = 21
                 TabOrder = 5
@@ -1412,7 +1412,7 @@ object MainView: TMainView
       end
     end
     object btnSalvarConfig: TBitBtn
-      Left = 74
+      Left = 76
       Top = 560
       Width = 153
       Height = 36
@@ -1461,7 +1461,6 @@ object MainView: TMainView
           Align = alClient
           ScrollBars = ssVertical
           TabOrder = 0
-          ExplicitLeft = 1
         end
       end
     end

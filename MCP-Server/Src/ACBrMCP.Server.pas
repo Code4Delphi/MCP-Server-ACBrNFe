@@ -83,7 +83,7 @@ var
   LTool: TTMSMCPTool;
   LProp: TTMSMCPToolProperty;
 begin
-  FMCPServer.Tools.RegisterTool('GerarNFe', 'Gera uma NF-e com o número informado', Self.GerarNFe);
+  FMCPServer.Tools.RegisterTool('GerarNFe', 'Gera uma NF-e com o número e o destinatário informado', Self.GerarNFe);
 
   LTool := FMCPServer.Tools.FindByName('GerarNFe');
   LProp := LTool.Properties.Add;
@@ -191,7 +191,7 @@ begin
   try
     LMsg.Add('Nota fiscal emitida ');
     LMsg.Add('Numero: ' + ComponentesDM.ACBrNFe1.NotasFiscais.Items[0].NFe.Ide.nNF.ToString);
-    LMsg.Add('Destinatario: ' + ADestinatario.RazaoSocial); //ComponentesDM.ACBrNFe1.NotasFiscais.Items[0].NFe.Dest.EnderDest.xCpl);
+    LMsg.Add('Destinatario: ' + ADestinatario.RazaoSocial);
     LMsg.Add('');
     LMsg.Add('Atenciosamente, Cesar Cardoso');
     LMsg.Add('Data e hora: ' + DateTimeToStr(Now));
