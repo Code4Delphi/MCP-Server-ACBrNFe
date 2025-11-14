@@ -1,7 +1,7 @@
 object MainView: TMainView
   Left = 252
   Top = 127
-  Caption = 'ACBrNFe - Programa Exemplo'
+  Caption = 'MCP Server ACBrNFe - Configura'#231#245'es'
   ClientHeight = 612
   ClientWidth = 866
   Color = clBtnFace
@@ -34,7 +34,7 @@ object MainView: TMainView
           Top = 0
           Width = 287
           Height = 525
-          ActivePage = TabSheet11
+          ActivePage = TabSheet4
           Align = alClient
           MultiLine = True
           TabOrder = 0
@@ -1472,8 +1472,8 @@ object MainView: TMainView
       'Arquivos NFE (*-nfe.XML)|*-nfe.XML|Arquivos XML (*.XML)|*.XML|To' +
       'dos os Arquivos (*.*)|*.*'
     Title = 'Selecione a NFe'
-    Left = 563
-    Top = 519
+    Left = 507
+    Top = 311
   end
   object ACBrNFe1: TACBrNFe
     Configuracoes.Geral.SSLLib = libNone

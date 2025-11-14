@@ -1,7 +1,7 @@
 object ComponentesDM: TComponentesDM
   OnCreate = DataModuleCreate
   Height = 270
-  Width = 532
+  Width = 389
   object ACBrNFe1: TACBrNFe
     MAIL = ACBrMail1
     Configuracoes.Geral.SSLLib = libNone
@@ -21,8 +21,8 @@ object ComponentesDM: TComponentesDM
     Configuracoes.WebServices.QuebradeLinha = '|'
     Configuracoes.RespTec.IdCSRT = 0
     DANFE = ACBrNFeDANFeRL1
-    Left = 122
-    Top = 95
+    Left = 146
+    Top = 47
   end
   object ACBrNFeDANFeRL1: TACBrNFeDANFeRL
     Sistema = 'Projeto ACBr - www.projetoacbr.com.br'
@@ -49,8 +49,8 @@ object ComponentesDM: TComponentesDM
     ImprimeDetalhamentoEspecifico = False
     ExibeResumoCanhoto = False
     ExibeCampoFatura = False
-    Left = 219
-    Top = 95
+    Left = 243
+    Top = 47
   end
   object ACBrMail1: TACBrMail
     Host = '127.0.0.1'
@@ -60,7 +60,7 @@ object ComponentesDM: TComponentesDM
     Attempts = 3
     DefaultCharset = UTF_8
     IDECharset = CP1252
-    Left = 162
-    Top = 175
+    Left = 186
+    Top = 127
   end
 end

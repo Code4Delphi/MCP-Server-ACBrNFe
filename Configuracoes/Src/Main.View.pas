@@ -1,33 +1,3 @@
-{******************************************************************************}
-{ Projeto: Componentes ACBr                                                    }
-{  Biblioteca multiplataforma de componentes Delphi para interação com equipa- }
-{ mentos de Automação Comercial utilizados no Brasil                           }
-{                                                                              }
-{ Direitos Autorais Reservados (c) 2020 Daniel Simoes de Almeida               }
-{                                                                              }
-{  Você pode obter a última versão desse arquivo na pagina do  Projeto ACBr    }
-{ Componentes localizado em      http://www.sourceforge.net/projects/acbr      }
-{                                                                              }
-{  Esta biblioteca é software livre; você pode redistribuí-la e/ou modificá-la }
-{ sob os termos da Licença Pública Geral Menor do GNU conforme publicada pela  }
-{ Free Software Foundation; tanto a versão 2.1 da Licença, ou (a seu critério) }
-{ qualquer versão posterior.                                                   }
-{                                                                              }
-{  Esta biblioteca é distribuída na expectativa de que seja útil, porém, SEM   }
-{ NENHUMA GARANTIA; nem mesmo a garantia implícita de COMERCIABILIDADE OU      }
-{ ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA. Consulte a Licença Pública Geral Menor}
-{ do GNU para mais detalhes. (Arquivo LICENÇA.TXT ou LICENSE.TXT)              }
-{                                                                              }
-{  Você deve ter recebido uma cópia da Licença Pública Geral Menor do GNU junto}
-{ com esta biblioteca; se não, escreva para a Free Software Foundation, Inc.,  }
-{ no endereço 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.          }
-{ Você também pode obter uma copia da licença em:                              }
-{ http://www.opensource.org/licenses/lgpl-license.php                          }
-{                                                                              }
-{ Daniel Simões de Almeida - daniel@projetoacbr.com.br - www.projetoacbr.com.br}
-{       Rua Coronel Aureliano de Camargo, 963 - Tatuí - SP - 18270-170         }
-{******************************************************************************}
-
 unit Main.View;
 
 interface
@@ -306,72 +276,6 @@ const
 
 {$R *.dfm}
 
-procedure TMainView.AtualizarSSLLibsCombo;
-begin
-  cbSSLLib.ItemIndex     := Integer(ACBrNFe1.Configuracoes.Geral.SSLLib);
-  cbCryptLib.ItemIndex   := Integer(ACBrNFe1.Configuracoes.Geral.SSLCryptLib);
-  cbHttpLib.ItemIndex    := Integer(ACBrNFe1.Configuracoes.Geral.SSLHttpLib);
-  cbXmlSignLib.ItemIndex := Integer(ACBrNFe1.Configuracoes.Geral.SSLXmlSignLib);
-
-  cbSSLType.Enabled := (ACBrNFe1.Configuracoes.Geral.SSLHttpLib in [httpWinHttp, httpOpenSSL]);
-end;
-
-procedure TMainView.btnDataValidadeClick(Sender: TObject);
-begin
-  ACBrNFe1.Configuracoes.Certificados.URLPFX := edtURLPFX.Text;
-  ACBrNFe1.Configuracoes.Certificados.ArquivoPFX := edtCaminho.Text;
-  ACBrNFe1.Configuracoes.Certificados.Senha := AnsiString(edtSenha.Text);
-  ACBrNFe1.Configuracoes.Certificados.NumeroSerie := edtNumSerie.Text;
-
-  ShowMessage(FormatDateTimeBr(ACBrNFe1.SSL.CertDataVenc));
-end;
-
-procedure TMainView.cbCryptLibChange(Sender: TObject);
-begin
-  try
-    if cbCryptLib.ItemIndex <> -1 then
-      ACBrNFe1.Configuracoes.Geral.SSLCryptLib := TSSLCryptLib(cbCryptLib.ItemIndex);
-  finally
-    AtualizarSSLLibsCombo;
-  end;
-end;
-
-procedure TMainView.cbHttpLibChange(Sender: TObject);
-begin
-  try
-    if cbHttpLib.ItemIndex <> -1 then
-      ACBrNFe1.Configuracoes.Geral.SSLHttpLib := TSSLHttpLib(cbHttpLib.ItemIndex);
-  finally
-    AtualizarSSLLibsCombo;
-  end;
-end;
-
-procedure TMainView.cbSSLLibChange(Sender: TObject);
-begin
-  try
-    if cbSSLLib.ItemIndex <> -1 then
-      ACBrNFe1.Configuracoes.Geral.SSLLib := TSSLLib(cbSSLLib.ItemIndex);
-  finally
-    AtualizarSSLLibsCombo;
-  end;
-end;
-
-procedure TMainView.cbSSLTypeChange(Sender: TObject);
-begin
-  if cbSSLType.ItemIndex <> -1 then
-     ACBrNFe1.SSL.SSLType := TSSLType(cbSSLType.ItemIndex);
-end;
-
-procedure TMainView.cbXmlSignLibChange(Sender: TObject);
-begin
-  try
-    if cbXmlSignLib.ItemIndex <> -1 then
-      ACBrNFe1.Configuracoes.Geral.SSLXmlSignLib := TSSLXmlSignLib(cbXmlSignLib.ItemIndex);
-  finally
-    AtualizarSSLLibsCombo;
-  end;
-end;
-
 procedure TMainView.FormCreate(Sender: TObject);
 var
   T: TSSLLib;
@@ -429,7 +333,7 @@ begin
      cbVersaoQRCode.Items.Add( GetEnumName(TypeInfo(TpcnVersaoQrCode), integer(P) ) );
   cbVersaoQRCode.ItemIndex := 0;
 
-  LerConfiguracao;
+  Self.LerConfiguracao;
   pgRespostas.ActivePageIndex := 0;
   PageControl1.ActivePageIndex := 0;
   PageControl4.ActivePageIndex := 3;
@@ -438,6 +342,117 @@ end;
 function TMainView.GetFileNameConfiguracoesIni: string;
 begin
   Result := '..\Configuracoes.ini';
+end;
+
+procedure TMainView.LerConfiguracao;
+var
+  IniFile: String;
+  Ini: TIniFile;
+  StreamMemo: TMemoryStream;
+begin
+  IniFile := Self.GetFileNameConfiguracoesIni; //ChangeFileExt(ParamStr(0), '.ini');
+
+  Ini := TIniFile.Create(IniFile);
+  try
+    cbSSLLib.ItemIndex     := Ini.ReadInteger('Certificado', 'SSLLib',     4);
+    cbCryptLib.ItemIndex   := Ini.ReadInteger('Certificado', 'CryptLib',   0);
+    cbHttpLib.ItemIndex    := Ini.ReadInteger('Certificado', 'HttpLib',    0);
+    cbXmlSignLib.ItemIndex := Ini.ReadInteger('Certificado', 'XmlSignLib', 0);
+    cbSSLLibChange(cbSSLLib);
+    edtURLPFX.Text         := Ini.ReadString( 'Certificado', 'URL',        '');
+    edtCaminho.Text        := Ini.ReadString( 'Certificado', 'Caminho',    '');
+    edtSenha.Text          := Ini.ReadString( 'Certificado', 'Senha',      '');
+    edtNumSerie.Text       := Ini.ReadString( 'Certificado', 'NumSerie',   '');
+
+    cbxAtualizarXML.Checked     := Ini.ReadBool(   'Geral', 'AtualizarXML',     True);
+    cbxExibirErroSchema.Checked := Ini.ReadBool(   'Geral', 'ExibirErroSchema', True);
+    edtFormatoAlerta.Text       := Ini.ReadString( 'Geral', 'FormatoAlerta',    'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.');
+    cbFormaEmissao.ItemIndex    := Ini.ReadInteger('Geral', 'FormaEmissao',     0);
+    cbModeloDF.ItemIndex        := Ini.ReadInteger('Geral', 'ModeloDF',         0);
+
+    cbVersaoDF.ItemIndex      := Ini.ReadInteger('Geral', 'VersaoDF',       3);
+    cbVersaoQRCode.ItemIndex  := Ini.ReadInteger('Geral', 'VersaoQRCode',   2);
+    edtIdToken.Text           := Ini.ReadString( 'Geral', 'IdToken',        '');
+    edtToken.Text             := Ini.ReadString( 'Geral', 'Token',          '');
+    ckSalvar.Checked          := Ini.ReadBool(   'Geral', 'Salvar',         True);
+    cbxRetirarAcentos.Checked := Ini.ReadBool(   'Geral', 'RetirarAcentos', True);
+    edtPathLogs.Text          := Ini.ReadString( 'Geral', 'PathSalvar',     PathWithDelim(ExtractFilePath(Application.ExeName))+'Logs');
+    edtPathSchemas.Text       := Ini.ReadString( 'Geral', 'PathSchemas',    PathWithDelim('..\..\Schemas\NFe'));
+
+    cbUF.ItemIndex := cbUF.Items.IndexOf(Ini.ReadString('WebService', 'UF', 'SP'));
+
+    rgTipoAmb.ItemIndex   := Ini.ReadInteger('WebService', 'Ambiente',   0);
+    cbxVisualizar.Checked := Ini.ReadBool(   'WebService', 'Visualizar', False);
+    cbxSalvarSOAP.Checked := Ini.ReadBool(   'WebService', 'SalvarSOAP', False);
+    cbxAjustarAut.Checked := Ini.ReadBool(   'WebService', 'AjustarAut', False);
+    edtAguardar.Text      := Ini.ReadString( 'WebService', 'Aguardar',   '0');
+    edtTentativas.Text    := Ini.ReadString( 'WebService', 'Tentativas', '5');
+    edtIntervalo.Text     := Ini.ReadString( 'WebService', 'Intervalo',  '0');
+    seTimeOut.Value       := Ini.ReadInteger('WebService', 'TimeOut',    5000);
+    cbSSLType.ItemIndex   := Ini.ReadInteger('WebService', 'SSLType',    5);
+
+    edtProxyHost.Text  := Ini.ReadString('Proxy', 'Host',  '');
+    edtProxyPorta.Text := Ini.ReadString('Proxy', 'Porta', '');
+    edtProxyUser.Text  := Ini.ReadString('Proxy', 'User',  '');
+    edtProxySenha.Text := Ini.ReadString('Proxy', 'Pass',  '');
+
+    cbxSalvarArqs.Checked       := Ini.ReadBool(  'Arquivos', 'Salvar',           false);
+    cbxPastaMensal.Checked      := Ini.ReadBool(  'Arquivos', 'PastaMensal',      false);
+    cbxAdicionaLiteral.Checked  := Ini.ReadBool(  'Arquivos', 'AddLiteral',       false);
+    cbxEmissaoPathNFe.Checked   := Ini.ReadBool(  'Arquivos', 'EmissaoPathNFe',   false);
+    cbxSalvaPathEvento.Checked  := Ini.ReadBool(  'Arquivos', 'SalvarPathEvento', false);
+    cbxSepararPorCNPJ.Checked   := Ini.ReadBool(  'Arquivos', 'SepararPorCNPJ',   false);
+    cbxSepararPorModelo.Checked := Ini.ReadBool(  'Arquivos', 'SepararPorModelo', false);
+    edtPathNFe.Text             := Ini.ReadString('Arquivos', 'PathNFe',          '');
+    edtPathInu.Text             := Ini.ReadString('Arquivos', 'PathInu',          '');
+    edtPathEvento.Text          := Ini.ReadString('Arquivos', 'PathEvento',       '');
+    edtPathPDF.Text             := Ini.ReadString('Arquivos', 'PathPDF',          '');
+
+    edtEmitCNPJ.Text       := Ini.ReadString('Emitente', 'CNPJ',        '');
+    edtEmitIE.Text         := Ini.ReadString('Emitente', 'IE',          '');
+    edtEmitRazao.Text      := Ini.ReadString('Emitente', 'RazaoSocial', '');
+    edtEmitFantasia.Text   := Ini.ReadString('Emitente', 'Fantasia',    '');
+    edtEmitFone.Text       := Ini.ReadString('Emitente', 'Fone',        '');
+    edtEmitCEP.Text        := Ini.ReadString('Emitente', 'CEP',         '');
+    edtEmitLogradouro.Text := Ini.ReadString('Emitente', 'Logradouro',  '');
+    edtEmitNumero.Text     := Ini.ReadString('Emitente', 'Numero',      '');
+    edtEmitComp.Text       := Ini.ReadString('Emitente', 'Complemento', '');
+    edtEmitBairro.Text     := Ini.ReadString('Emitente', 'Bairro',      '');
+    edtEmitCodCidade.Text  := Ini.ReadString('Emitente', 'CodCidade',   '');
+    edtEmitCidade.Text     := Ini.ReadString('Emitente', 'Cidade',      '');
+    edtEmitUF.Text         := Ini.ReadString('Emitente', 'UF',          '');
+
+    cbTipoEmpresa.ItemIndex := Ini.ReadInteger('Emitente', 'CRT', 2);
+
+    // Responsável Técnico
+    edtIdCSRT.Text := Ini.ReadString('RespTecnico', 'IdCSRT', '');
+    edtCSRT.Text := Ini.ReadString('RespTecnico', 'CSRT', '');
+
+    edtInfRespTecCNPJ.Text := Ini.ReadString('infRespTec', 'CNPJ', '');
+    edtInfRespTecxContato.Text := Ini.ReadString('infRespTec', 'xContato', '');
+    edtInfRespTecEmail.Text := Ini.ReadString('infRespTec', 'Email', '');
+    edtInfRespTecFone.Text := Ini.ReadString('infRespTec', 'Fone', '');
+
+    edtSmtpHost.Text     := Ini.ReadString('Email', 'Host',    '');
+    edtSmtpPort.Text     := Ini.ReadString('Email', 'Port',    '');
+    edtSmtpUser.Text     := Ini.ReadString('Email', 'User',    '');
+    edtSmtpFromEmail.Text := Ini.ReadString('Email', 'FromEmail',    '');
+
+    edtSmtpPass.Text     := Ini.ReadString('Email', 'Pass',    '');
+    edtEmailAssunto.Text := Ini.ReadString('Email', 'Assunto', '');
+    cbEmailSSL.Checked   := Ini.ReadBool(  'Email', 'SSL',     False);
+    cbEmailTLS.Checked   := Ini.ReadBool(  'Email', 'TLS',     False);
+
+    StreamMemo := TMemoryStream.Create;
+    Ini.ReadBinaryStream('Email', 'Mensagem', StreamMemo);
+    mmEmailMsg.Lines.LoadFromStream(StreamMemo);
+    StreamMemo.Free;
+
+    rgTipoDanfe.ItemIndex := Ini.ReadInteger('DANFE', 'Tipo',       0);
+    edtLogoMarca.Text     := Ini.ReadString( 'DANFE', 'LogoMarca',  '');
+  finally
+    Ini.Free;
+  end;
 end;
 
 procedure TMainView.btnSalvarConfigClick(Sender: TObject);
@@ -554,6 +569,72 @@ begin
   end;
 end;
 
+procedure TMainView.AtualizarSSLLibsCombo;
+begin
+  cbSSLLib.ItemIndex     := Integer(ACBrNFe1.Configuracoes.Geral.SSLLib);
+  cbCryptLib.ItemIndex   := Integer(ACBrNFe1.Configuracoes.Geral.SSLCryptLib);
+  cbHttpLib.ItemIndex    := Integer(ACBrNFe1.Configuracoes.Geral.SSLHttpLib);
+  cbXmlSignLib.ItemIndex := Integer(ACBrNFe1.Configuracoes.Geral.SSLXmlSignLib);
+
+  cbSSLType.Enabled := (ACBrNFe1.Configuracoes.Geral.SSLHttpLib in [httpWinHttp, httpOpenSSL]);
+end;
+
+procedure TMainView.btnDataValidadeClick(Sender: TObject);
+begin
+  ACBrNFe1.Configuracoes.Certificados.URLPFX := edtURLPFX.Text;
+  ACBrNFe1.Configuracoes.Certificados.ArquivoPFX := edtCaminho.Text;
+  ACBrNFe1.Configuracoes.Certificados.Senha := AnsiString(edtSenha.Text);
+  ACBrNFe1.Configuracoes.Certificados.NumeroSerie := edtNumSerie.Text;
+
+  ShowMessage(FormatDateTimeBr(ACBrNFe1.SSL.CertDataVenc));
+end;
+
+procedure TMainView.cbCryptLibChange(Sender: TObject);
+begin
+  try
+    if cbCryptLib.ItemIndex <> -1 then
+      ACBrNFe1.Configuracoes.Geral.SSLCryptLib := TSSLCryptLib(cbCryptLib.ItemIndex);
+  finally
+    AtualizarSSLLibsCombo;
+  end;
+end;
+
+procedure TMainView.cbHttpLibChange(Sender: TObject);
+begin
+  try
+    if cbHttpLib.ItemIndex <> -1 then
+      ACBrNFe1.Configuracoes.Geral.SSLHttpLib := TSSLHttpLib(cbHttpLib.ItemIndex);
+  finally
+    AtualizarSSLLibsCombo;
+  end;
+end;
+
+procedure TMainView.cbSSLLibChange(Sender: TObject);
+begin
+  try
+    if cbSSLLib.ItemIndex <> -1 then
+      ACBrNFe1.Configuracoes.Geral.SSLLib := TSSLLib(cbSSLLib.ItemIndex);
+  finally
+    AtualizarSSLLibsCombo;
+  end;
+end;
+
+procedure TMainView.cbSSLTypeChange(Sender: TObject);
+begin
+  if cbSSLType.ItemIndex <> -1 then
+     ACBrNFe1.SSL.SSLType := TSSLType(cbSSLType.ItemIndex);
+end;
+
+procedure TMainView.cbXmlSignLibChange(Sender: TObject);
+begin
+  try
+    if cbXmlSignLib.ItemIndex <> -1 then
+      ACBrNFe1.Configuracoes.Geral.SSLXmlSignLib := TSSLXmlSignLib(cbXmlSignLib.ItemIndex);
+  finally
+    AtualizarSSLLibsCombo;
+  end;
+end;
+
 procedure TMainView.lblMouseEnter(Sender: TObject);
 begin
   TLabel(Sender).Font.Style := [fsBold,fsUnderline];
@@ -562,117 +643,6 @@ end;
 procedure TMainView.lblMouseLeave(Sender: TObject);
 begin
   TLabel(Sender).Font.Style := [fsBold];
-end;
-
-procedure TMainView.LerConfiguracao;
-var
-  IniFile: String;
-  Ini: TIniFile;
-  StreamMemo: TMemoryStream;
-begin
-  IniFile := Self.GetFileNameConfiguracoesIni; //ChangeFileExt(ParamStr(0), '.ini');
-
-  Ini := TIniFile.Create(IniFile);
-  try
-    cbSSLLib.ItemIndex     := Ini.ReadInteger('Certificado', 'SSLLib',     4);
-    cbCryptLib.ItemIndex   := Ini.ReadInteger('Certificado', 'CryptLib',   0);
-    cbHttpLib.ItemIndex    := Ini.ReadInteger('Certificado', 'HttpLib',    0);
-    cbXmlSignLib.ItemIndex := Ini.ReadInteger('Certificado', 'XmlSignLib', 0);
-    cbSSLLibChange(cbSSLLib);
-    edtURLPFX.Text         := Ini.ReadString( 'Certificado', 'URL',        '');
-    edtCaminho.Text        := Ini.ReadString( 'Certificado', 'Caminho',    '');
-    edtSenha.Text          := Ini.ReadString( 'Certificado', 'Senha',      '');
-    edtNumSerie.Text       := Ini.ReadString( 'Certificado', 'NumSerie',   '');
-
-    cbxAtualizarXML.Checked     := Ini.ReadBool(   'Geral', 'AtualizarXML',     True);
-    cbxExibirErroSchema.Checked := Ini.ReadBool(   'Geral', 'ExibirErroSchema', True);
-    edtFormatoAlerta.Text       := Ini.ReadString( 'Geral', 'FormatoAlerta',    'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.');
-    cbFormaEmissao.ItemIndex    := Ini.ReadInteger('Geral', 'FormaEmissao',     0);
-    cbModeloDF.ItemIndex        := Ini.ReadInteger('Geral', 'ModeloDF',         0);
-
-    cbVersaoDF.ItemIndex      := Ini.ReadInteger('Geral', 'VersaoDF',       3);
-    cbVersaoQRCode.ItemIndex  := Ini.ReadInteger('Geral', 'VersaoQRCode',   2);
-    edtIdToken.Text           := Ini.ReadString( 'Geral', 'IdToken',        '');
-    edtToken.Text             := Ini.ReadString( 'Geral', 'Token',          '');
-    ckSalvar.Checked          := Ini.ReadBool(   'Geral', 'Salvar',         True);
-    cbxRetirarAcentos.Checked := Ini.ReadBool(   'Geral', 'RetirarAcentos', True);
-    edtPathLogs.Text          := Ini.ReadString( 'Geral', 'PathSalvar',     PathWithDelim(ExtractFilePath(Application.ExeName))+'Logs');
-    edtPathSchemas.Text       := Ini.ReadString( 'Geral', 'PathSchemas',    PathWithDelim('..\..\Schemas\NFe'));
-
-    cbUF.ItemIndex := cbUF.Items.IndexOf(Ini.ReadString('WebService', 'UF', 'SP'));
-
-    rgTipoAmb.ItemIndex   := Ini.ReadInteger('WebService', 'Ambiente',   0);
-    cbxVisualizar.Checked := Ini.ReadBool(   'WebService', 'Visualizar', False);
-    cbxSalvarSOAP.Checked := Ini.ReadBool(   'WebService', 'SalvarSOAP', False);
-    cbxAjustarAut.Checked := Ini.ReadBool(   'WebService', 'AjustarAut', False);
-    edtAguardar.Text      := Ini.ReadString( 'WebService', 'Aguardar',   '0');
-    edtTentativas.Text    := Ini.ReadString( 'WebService', 'Tentativas', '5');
-    edtIntervalo.Text     := Ini.ReadString( 'WebService', 'Intervalo',  '0');
-    seTimeOut.Value       := Ini.ReadInteger('WebService', 'TimeOut',    5000);
-    cbSSLType.ItemIndex   := Ini.ReadInteger('WebService', 'SSLType',    5);
-
-    edtProxyHost.Text  := Ini.ReadString('Proxy', 'Host',  '');
-    edtProxyPorta.Text := Ini.ReadString('Proxy', 'Porta', '');
-    edtProxyUser.Text  := Ini.ReadString('Proxy', 'User',  '');
-    edtProxySenha.Text := Ini.ReadString('Proxy', 'Pass',  '');
-
-    cbxSalvarArqs.Checked       := Ini.ReadBool(  'Arquivos', 'Salvar',           false);
-    cbxPastaMensal.Checked      := Ini.ReadBool(  'Arquivos', 'PastaMensal',      false);
-    cbxAdicionaLiteral.Checked  := Ini.ReadBool(  'Arquivos', 'AddLiteral',       false);
-    cbxEmissaoPathNFe.Checked   := Ini.ReadBool(  'Arquivos', 'EmissaoPathNFe',   false);
-    cbxSalvaPathEvento.Checked  := Ini.ReadBool(  'Arquivos', 'SalvarPathEvento', false);
-    cbxSepararPorCNPJ.Checked   := Ini.ReadBool(  'Arquivos', 'SepararPorCNPJ',   false);
-    cbxSepararPorModelo.Checked := Ini.ReadBool(  'Arquivos', 'SepararPorModelo', false);
-    edtPathNFe.Text             := Ini.ReadString('Arquivos', 'PathNFe',          '');
-    edtPathInu.Text             := Ini.ReadString('Arquivos', 'PathInu',          '');
-    edtPathEvento.Text          := Ini.ReadString('Arquivos', 'PathEvento',       '');
-    edtPathPDF.Text             := Ini.ReadString('Arquivos', 'PathPDF',          '');
-
-    edtEmitCNPJ.Text       := Ini.ReadString('Emitente', 'CNPJ',        '');
-    edtEmitIE.Text         := Ini.ReadString('Emitente', 'IE',          '');
-    edtEmitRazao.Text      := Ini.ReadString('Emitente', 'RazaoSocial', '');
-    edtEmitFantasia.Text   := Ini.ReadString('Emitente', 'Fantasia',    '');
-    edtEmitFone.Text       := Ini.ReadString('Emitente', 'Fone',        '');
-    edtEmitCEP.Text        := Ini.ReadString('Emitente', 'CEP',         '');
-    edtEmitLogradouro.Text := Ini.ReadString('Emitente', 'Logradouro',  '');
-    edtEmitNumero.Text     := Ini.ReadString('Emitente', 'Numero',      '');
-    edtEmitComp.Text       := Ini.ReadString('Emitente', 'Complemento', '');
-    edtEmitBairro.Text     := Ini.ReadString('Emitente', 'Bairro',      '');
-    edtEmitCodCidade.Text  := Ini.ReadString('Emitente', 'CodCidade',   '');
-    edtEmitCidade.Text     := Ini.ReadString('Emitente', 'Cidade',      '');
-    edtEmitUF.Text         := Ini.ReadString('Emitente', 'UF',          '');
-
-    cbTipoEmpresa.ItemIndex := Ini.ReadInteger('Emitente', 'CRT', 2);
-
-    // Responsável Técnico
-    edtIdCSRT.Text := Ini.ReadString('RespTecnico', 'IdCSRT', '');
-    edtCSRT.Text := Ini.ReadString('RespTecnico', 'CSRT', '');
-
-    edtInfRespTecCNPJ.Text := Ini.ReadString('infRespTec', 'CNPJ', '');
-    edtInfRespTecxContato.Text := Ini.ReadString('infRespTec', 'xContato', '');
-    edtInfRespTecEmail.Text := Ini.ReadString('infRespTec', 'Email', '');
-    edtInfRespTecFone.Text := Ini.ReadString('infRespTec', 'Fone', '');
-
-    edtSmtpHost.Text     := Ini.ReadString('Email', 'Host',    '');
-    edtSmtpPort.Text     := Ini.ReadString('Email', 'Port',    '');
-    edtSmtpUser.Text     := Ini.ReadString('Email', 'User',    '');
-    edtSmtpFromEmail.Text := Ini.ReadString('Email', 'FromEmail',    '');
-
-    edtSmtpPass.Text     := Ini.ReadString('Email', 'Pass',    '');
-    edtEmailAssunto.Text := Ini.ReadString('Email', 'Assunto', '');
-    cbEmailSSL.Checked   := Ini.ReadBool(  'Email', 'SSL',     False);
-    cbEmailTLS.Checked   := Ini.ReadBool(  'Email', 'TLS',     False);
-
-    StreamMemo := TMemoryStream.Create;
-    Ini.ReadBinaryStream('Email', 'Mensagem', StreamMemo);
-    mmEmailMsg.Lines.LoadFromStream(StreamMemo);
-    StreamMemo.Free;
-
-    rgTipoDanfe.ItemIndex := Ini.ReadInteger('DANFE', 'Tipo',       0);
-    edtLogoMarca.Text     := Ini.ReadString( 'DANFE', 'LogoMarca',  '');
-  finally
-    Ini.Free;
-  end;
 end;
 
 procedure TMainView.PathClick(Sender: TObject);
@@ -801,6 +771,5 @@ procedure TMainView.spPathSchemasClick(Sender: TObject);
 begin
   PathClick(edtPathSchemas);
 end;
-
 
 end.

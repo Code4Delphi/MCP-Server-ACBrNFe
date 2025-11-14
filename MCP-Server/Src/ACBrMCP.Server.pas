@@ -25,7 +25,6 @@ type
     FMsgRetorno: string;
     procedure OnServerLog(Sender: TObject; const LogMessage: string);
     function GerarNFe(const Args: array of TValue): TValue;
-    function Ping(const Args: array of TValue): TValue;
     procedure EnviarNFePorEmail;
     procedure GravarNFeNoBanco;
     procedure AddLog(const AMsg: string);
@@ -46,7 +45,7 @@ constructor TServer.Create;
 begin
   FMCPServer := TTMSMCPServer.Create(nil);
   FMCPServer.ServerName := 'ACBrNFe-MCPServer';
-  FMCPServer.ServerVersion := '1.0.0';
+  FMCPServer.ServerVersion := '2.0.0';
   FMCPServer.OnLog := OnServerLog;
 
   //CREATE HTTP TRANSPORT WITH CUSTOM ENDPOINT
@@ -84,15 +83,6 @@ var
   LTool: TTMSMCPTool;
   LProp: TTMSMCPToolProperty;
 begin
-  FMCPServer.Tools.RegisterTool('Ping', 'Recebe um texto como chave e o retorna com um protocolo', Self.Ping);
-
-  LTool := FMCPServer.Tools.FindByName('Ping');
-  LProp := LTool.Properties.Add;
-  LProp.Name := 'Chave';
-  LProp.Description := 'Chave para geração do protocolo';
-  LProp.PropertyType := TTMSMCPToolPropertyType.ptString;
-  LProp.Required := True;
-
   FMCPServer.Tools.RegisterTool('GerarNFe', 'Gera uma NF-e com o número informado', Self.GerarNFe);
 
   LTool := FMCPServer.Tools.FindByName('GerarNFe');
@@ -108,24 +98,6 @@ begin
   LProp.Description := 'Nome do destinatario';
   LProp.PropertyType := TTMSMCPToolPropertyType.ptString;
   LProp.Required := True;
-end;
-
-function TServer.Ping(const Args: array of TValue): TValue;
-var
-  LChave: string;
-begin
-  LChave := '';
-
-  if Length(Args) > 0 then
-    LChave := Args[0].AsString;
-
-  Result := TValue.From<string>(Format('A chave informada foi %s e o protocolo é %s', [LChave, DateTimeToStr(Now)]));
-end;
-
-procedure TServer.AddLog(const AMsg: string);
-begin
-  FMsgRetorno := FMsgRetorno + AMsg;
-  WriteLn(AMsg);
 end;
 
 function TServer.GerarNFe(const Args: array of TValue): TValue;
@@ -197,6 +169,12 @@ begin
   end;
 end;
 
+procedure TServer.AddLog(const AMsg: string);
+begin
+  FMsgRetorno := FMsgRetorno + AMsg;
+  WriteLn(AMsg);
+end;
+
 procedure TServer.GravarNFeNoBanco;
 var
   LSalvar: TACBrMCPSalvar;
@@ -211,10 +189,7 @@ end;
 
 procedure TServer.EnviarNFePorEmail;
 begin
-  var LMsg: Tstrings;
-  var LCC: Tstrings;
-  LMsg := TStringList.Create;
-  LCC := TStringList.Create;
+  var LMsg := TStringList.Create;
   try
     LMsg.Add('Nota fiscal emitida ');
     LMsg.Add('Numero: ' + ComponentesDM.ACBrNFe1.NotasFiscais.Items[0].NFe.Ide.nNF.ToString);
@@ -226,9 +201,8 @@ begin
     var LEnviaPDF := False;
     ComponentesDM.ACBrNFe1.NotasFiscais.Items[0].EnviarEmail('contato@code4delphi.com.br',
       'Enviado pelo MCP ACBr. NFe n.: ' + ComponentesDM.ACBrNFe1.NotasFiscais.Items[0].NFe.Ide.nNF.ToString,
-      LMsg, LEnviaPDF, LCC, nil);
+      LMsg, LEnviaPDF, nil, nil);
   finally
-    LCC.Free;
     LMsg.Free;
   end;
 end;
