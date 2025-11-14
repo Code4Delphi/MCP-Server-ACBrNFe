@@ -1299,13 +1299,15 @@ object MainView: TMainView
           Top = 61
           Width = 120
           Height = 21
+          PasswordChar = '*'
           TabOrder = 2
         end
         object edtSmtpPass: TEdit
           Left = 137
-          Top = 64
+          Top = 61
           Width = 120
           Height = 21
+          PasswordChar = '*'
           TabOrder = 3
         end
         object edtEmailAssunto: TEdit
@@ -1343,6 +1345,7 @@ object MainView: TMainView
           Top = 104
           Width = 249
           Height = 21
+          PasswordChar = '*'
           TabOrder = 8
         end
       end

@@ -23,7 +23,6 @@ begin
     try
       ServerMCP.SetupServer;
       ServerMCP.Run;
-      //ServerMCP.ProcessarEnvioNFe(321);
     finally
       ServerMCP.Free;
       ComponentesDM.Free;
