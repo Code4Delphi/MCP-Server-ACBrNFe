@@ -183,13 +183,13 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="Src\Emitente.pas"/>
-        <DCCReference Include="Src\ACBrMCP.Preencher.pas"/>
+        <DCCReference Include="Src\PreencherNFe.pas"/>
         <DCCReference Include="Src\Database.Dm.pas">
             <Form>DatabaseDm</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="Src\ACBrMCP.Salvar.pas"/>
+        <DCCReference Include="Src\SalvarNFeBD.pas"/>
         <DCCReference Include="Src\Destinatario.pas"/>
         <DCCReference Include="Src\InfRespTec.pas"/>
         <BuildConfiguration Include="Base">

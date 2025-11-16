@@ -9,9 +9,9 @@ uses
   ACBrMCP.Server in 'Src\ACBrMCP.Server.pas',
   Componentes.DM in 'Src\Componentes.DM.pas' {ComponentesDM: TDataModule},
   Emitente in 'Src\Emitente.pas',
-  ACBrMCP.Preencher in 'Src\ACBrMCP.Preencher.pas',
+  PreencherNFe in 'Src\PreencherNFe.pas',
   Database.Dm in 'Src\Database.Dm.pas' {DatabaseDm: TDataModule},
-  ACBrMCP.Salvar in 'Src\ACBrMCP.Salvar.pas',
+  SalvarNFeBD in 'Src\SalvarNFeBD.pas',
   Destinatario in 'Src\Destinatario.pas',
   InfRespTec in 'Src\InfRespTec.pas';
 
