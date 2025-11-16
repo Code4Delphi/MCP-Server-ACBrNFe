@@ -15,7 +15,7 @@ uses
   ACBrMCP.Preencher,
   Componentes.DM,
   ACBrMCP.Salvar,
-  ACBrMCP.Destinatario;
+  Destinatario;
 
 type
   TServer = class

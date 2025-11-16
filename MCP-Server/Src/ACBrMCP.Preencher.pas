@@ -22,7 +22,7 @@ uses
   Componentes.DM,
   Emitente,
   InfRespTec,
-  ACBrMCP.Destinatario;
+  Destinatario;
 
 type
   TACBrMCPPreencher = class
@@ -76,7 +76,6 @@ var
   Ok: Boolean;
   NotaF: NotaFiscal;
   Produto: TDetCollectionItem;
-  Volume: TVolCollectionItem;
   Duplicata: TDupCollectionItem;
   ObsComplementar: TobsContCollectionItem;
   ObsFisco: TobsFiscoCollectionItem;
