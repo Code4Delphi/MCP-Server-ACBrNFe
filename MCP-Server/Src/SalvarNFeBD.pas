@@ -11,7 +11,7 @@ uses
   Database.Dm;
 
 type
-  TACBrMCPSalvar = class
+  TSalvarNFeBD = class
   private
     FDm: TDatabaseDm;
     FACBrNFe: TACBrNFe;
@@ -23,19 +23,19 @@ type
 
 implementation
 
-constructor TACBrMCPSalvar.Create;
+constructor TSalvarNFeBD.Create;
 begin
   FACBrNFe := ComponentesDM.ACBrNFe1;
   FDm := TDatabaseDm.Create(nil);
 end;
 
-destructor TACBrMCPSalvar.Destroy;
+destructor TSalvarNFeBD.Destroy;
 begin
   FDm.Free;
   inherited;
 end;
 
-procedure TACBrMCPSalvar.GravarNFeNoBanco;
+procedure TSalvarNFeBD.GravarNFeNoBanco;
 begin
   FDm.QNFeGet('');
   FDm.QNFe.Append;

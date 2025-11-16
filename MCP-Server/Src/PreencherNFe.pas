@@ -25,7 +25,7 @@ uses
   Destinatario;
 
 type
-  TACBrMCPPreencher = class
+  TPreencherNFe = class
   private
     FACBrNFe: TACBrNFe;
     FEmitente: TEmitente;
@@ -45,7 +45,7 @@ type
 
 implementation
 
-constructor TACBrMCPPreencher.Create;
+constructor TPreencherNFe.Create;
 begin
   FACBrNFe := ComponentesDM.ACBrNFe1;
   FEmitente := TEmitente.GetInstance;
@@ -53,7 +53,7 @@ begin
   FGerarCamposReformaTributaria := False;
 end;
 
-procedure TACBrMCPPreencher.Processar;
+procedure TPreencherNFe.Processar;
 begin
   try
     FACBrNFe.NotasFiscais.Clear;
@@ -71,7 +71,7 @@ begin
   end;
 end;
 
-procedure TACBrMCPPreencher.Preencher;
+procedure TPreencherNFe.Preencher;
 var
   Ok: Boolean;
   NotaF: NotaFiscal;

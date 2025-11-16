@@ -137,7 +137,7 @@ begin
       Exit;
     end;
 
-    var LEnviar := TACBrMCPPreencher.Create;
+    var LEnviar := TPreencherNFe.Create;
     try
       LEnviar.Numero := LNumero;
       LEnviar.Destinatario := LDestinatario;
@@ -175,9 +175,9 @@ end;
 
 procedure TServer.GravarNFeNoBanco;
 var
-  LSalvar: TACBrMCPSalvar;
+  LSalvar: TSalvarNFeBD;
 begin
-  LSalvar := TACBrMCPSalvar.Create;
+  LSalvar := TSalvarNFeBD.Create;
   try
     LSalvar.GravarNFeNoBanco;
   finally
