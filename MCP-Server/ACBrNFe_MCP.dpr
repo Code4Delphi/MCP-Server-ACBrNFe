@@ -14,7 +14,8 @@ uses
   SalvarNFeBD in 'Src\SalvarNFeBD.pas',
   Destinatario in 'Src\Destinatario.pas',
   InfRespTec in 'Src\InfRespTec.pas',
-  Tool.GerarNFe in 'Src\Tool.GerarNFe.pas';
+  Tool.GerarNFe in 'Src\Tool.GerarNFe.pas',
+  Tool.ReenviarNFe in 'Src\Tool.ReenviarNFe.pas';
 
 var
   ServerMCP: TServer;

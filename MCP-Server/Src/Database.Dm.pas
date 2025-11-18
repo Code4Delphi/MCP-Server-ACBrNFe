@@ -51,14 +51,26 @@ type
     QNFeserie: TIntegerField;
     QNFenumero: TIntegerField;
     QPessoasemail: TWideMemoField;
+    QNFeDetalhes: TFDQuery;
+    QNFeDetalhesid: TFDAutoIncField;
+    QNFeDetalhesid_destinatario: TIntegerField;
+    QNFeDetalhesserie: TIntegerField;
+    QNFeDetalhesnumero: TIntegerField;
+    QNFeDetalheschave: TWideStringField;
+    QNFeDetalhesxml_arquivo: TWideStringField;
+    QNFeDetalhesDestinatarioEmail: TWideMemoField;
+    QNFeDetalhesDestinatarioNome: TWideStringField;
+    QNFeid_destinatario: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     FSqlPessoas: string;
     FSqlQNFe: string;
+    FSqlQNFeDetalhes: string;
   public
     function QPessoasGet(const AIdPessoa: Integer): Boolean; overload;
     function QPessoasGet(const ANomePessoa: string): Boolean; overload;
     function QNFeGet(const AChaveNFe: string): Boolean;
+    function QNFeDetalhesGet(const AChaveNFe: string): Boolean;
   end;
 
 implementation
@@ -74,6 +86,7 @@ begin
 
   FSqlPessoas := QPessoas.SQL.Text;
   FSqlQNFe := QNFe.SQL.Text;
+  FSqlQNFeDetalhes := QNFeDetalhes.SQL.Text;
 end;
 
 function TDatabaseDm.QPessoasGet(const AIdPessoa: Integer): Boolean;
@@ -108,6 +121,17 @@ begin
   QNFe.Open;
 
   Result := not QNFe.IsEmpty;
+end;
+
+function TDatabaseDm.QNFeDetalhesGet(const AChaveNFe: string): Boolean;
+begin
+  QNFeDetalhes.Close;
+  QNFeDetalhes.SQL.Text := FSqlQNFeDetalhes;
+  QNFeDetalhes.SQL.Add('where nfe.chave = :Chave');
+  QNFeDetalhes.ParamByName('Chave').AsString := AChaveNFe;
+  QNFeDetalhes.Open;
+
+  Result := not QNFeDetalhes.IsEmpty;
 end;
 
 end.

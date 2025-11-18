@@ -113,7 +113,7 @@ begin
 
     ACBrNFe1.Configuracoes.Arquivos.PathSchemas := Ini.ReadString( 'Geral', 'PathSchemas', PathWithDelim('..\..\Schemas\NFe'));
     ACBrNFe1.Configuracoes.Arquivos.Salvar       := Ini.ReadBool(  'Arquivos', 'Salvar',           false);
-    ACBrNFe1.Configuracoes.Arquivos.SepararPorMes      := Ini.ReadBool(  'Arquivos', 'PastaMensal',      false);
+    ACBrNFe1.Configuracoes.Arquivos.SepararPorMes     := False; //Ini.ReadBool(  'Arquivos', 'PastaMensal',      false);
     ACBrNFe1.Configuracoes.Arquivos.AdicionarLiteral  := Ini.ReadBool(  'Arquivos', 'AddLiteral',       false);
     ACBrNFe1.Configuracoes.Arquivos.EmissaoPathNFe   := Ini.ReadBool(  'Arquivos', 'EmissaoPathNFe',   false);
     ACBrNFe1.Configuracoes.Arquivos.SalvarEvento  := Ini.ReadBool(  'Arquivos', 'SalvarPathEvento', false);

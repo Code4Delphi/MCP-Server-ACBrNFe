@@ -23,6 +23,10 @@ object DatabaseDm: TDatabaseDm
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = False
     end
+    object QNFeid_destinatario: TIntegerField
+      FieldName = 'id_destinatario'
+      Origin = 'id_destinatario'
+    end
     object QNFeserie: TIntegerField
       FieldName = 'serie'
       Origin = 'serie'
@@ -115,6 +119,69 @@ object DatabaseDm: TDatabaseDm
       FieldName = 'UF'
       Origin = 'UF'
       Size = 2
+    end
+  end
+  object QNFeDetalhes: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select '
+      'nfe.id, '
+      'nfe.id_destinatario,'
+      'nfe.serie,'
+      'nfe.numero,'
+      'nfe.chave,'
+      'nfe.xml_arquivo,'
+      'Destinatario.xNome as DestinatarioNome,'
+      'Destinatario.email as DestinatarioEmail'
+      'from nfe'
+      
+        'join pessoas as Destinatario on nfe.id_destinatario = Destinatar' +
+        'io.id ')
+    Left = 224
+    Top = 152
+    object QNFeDetalhesid: TFDAutoIncField
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = False
+    end
+    object QNFeDetalhesid_destinatario: TIntegerField
+      FieldName = 'id_destinatario'
+      Origin = 'id_destinatario'
+    end
+    object QNFeDetalhesserie: TIntegerField
+      FieldName = 'serie'
+      Origin = 'serie'
+    end
+    object QNFeDetalhesnumero: TIntegerField
+      FieldName = 'numero'
+      Origin = 'numero'
+    end
+    object QNFeDetalheschave: TWideStringField
+      FieldName = 'chave'
+      Origin = 'chave'
+      Size = 44
+    end
+    object QNFeDetalhesxml_arquivo: TWideStringField
+      FieldName = 'xml_arquivo'
+      Origin = 'xml_arquivo'
+      Size = 100
+    end
+    object QNFeDetalhesDestinatarioNome: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'DestinatarioNome'
+      Origin = 'xNome'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 80
+    end
+    object QNFeDetalhesDestinatarioEmail: TWideMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'DestinatarioEmail'
+      Origin = 'email'
+      ProviderFlags = []
+      ReadOnly = True
+      BlobType = ftWideMemo
     end
   end
 end

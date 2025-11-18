@@ -24,7 +24,7 @@ type
     procedure AddToolGerarNFe;
     procedure EnviarNFePorEmail(const ADestinatario: TDestinatario);
     function GerarNFe(const Args: array of TValue): TValue;
-    procedure GravarNFeNoBanco;
+    procedure GravarNFeNoBanco(const ADestinatario: TDestinatario);
     procedure AddLog(const AMsg: string);
   public
     constructor Create(const AMCPServer: TTMSMCPServer);
@@ -120,7 +120,7 @@ begin
     end;
 
     try
-      Self.GravarNFeNoBanco;
+      Self.GravarNFeNoBanco(LDestinatario);
     except
       on E: Exception do
         Self.AddLog('- Não foi possível gravar os dados no banco de dados. Mensagem; ' + E.Message);
@@ -159,13 +159,13 @@ begin
   end;
 end;
 
-procedure TToolGerarNFe.GravarNFeNoBanco;
+procedure TToolGerarNFe.GravarNFeNoBanco(const ADestinatario: TDestinatario);
 var
   LSalvar: TSalvarNFeBD;
 begin
   LSalvar := TSalvarNFeBD.Create;
   try
-    LSalvar.GravarNFeNoBanco;
+    LSalvar.GravarNFeNoBanco(ADestinatario);
   finally
     LSalvar.Free;
   end;
