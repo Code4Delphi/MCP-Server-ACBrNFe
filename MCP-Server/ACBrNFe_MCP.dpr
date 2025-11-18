@@ -13,7 +13,8 @@ uses
   Database.Dm in 'Src\Database.Dm.pas' {DatabaseDm: TDataModule},
   SalvarNFeBD in 'Src\SalvarNFeBD.pas',
   Destinatario in 'Src\Destinatario.pas',
-  InfRespTec in 'Src\InfRespTec.pas';
+  InfRespTec in 'Src\InfRespTec.pas',
+  Tool.GerarNFe in 'Src\Tool.GerarNFe.pas';
 
 var
   ServerMCP: TServer;

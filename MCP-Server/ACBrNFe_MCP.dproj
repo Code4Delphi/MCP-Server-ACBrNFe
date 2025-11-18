@@ -192,6 +192,7 @@
         <DCCReference Include="Src\SalvarNFeBD.pas"/>
         <DCCReference Include="Src\Destinatario.pas"/>
         <DCCReference Include="Src\InfRespTec.pas"/>
+        <DCCReference Include="Src\Tool.GerarNFe.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
