@@ -51,20 +51,22 @@ begin
 end;
 
 procedure TToolGerarNFe.AddToolGerarNFe;
+const
+  C_NOME_TOOL = 'GerarNFe';
 var
   LTool: TTMSMCPTool;
   LProp: TTMSMCPToolProperty;
 begin
-  FMCPServer.Tools.RegisterTool('GerarNFe', 'Gera uma NF-e com o número e o destinatário informado', Self.GerarNFe);
+  FMCPServer.Tools.RegisterTool(C_NOME_TOOL, 'Gera uma NF-e com o número e o destinatário informado', Self.GerarNFe);
 
-  LTool := FMCPServer.Tools.FindByName('GerarNFe');
+  LTool := FMCPServer.Tools.FindByName(C_NOME_TOOL);
   LProp := LTool.Properties.Add;
   LProp.Name := 'NumeroParaNFe';
   LProp.Description := 'Número para geração da NFe';
   LProp.PropertyType := TTMSMCPToolPropertyType.ptInteger;
   LProp.Required := True;
 
-  LTool := FMCPServer.Tools.FindByName('GerarNFe');
+  LTool := FMCPServer.Tools.FindByName(C_NOME_TOOL);
   LProp := LTool.Properties.Add;
   LProp.Name := 'NomeDoDestinatario';
   LProp.Description := 'Nome do destinatario';
