@@ -10,7 +10,8 @@ uses
   TMS.MCP.Tools,
   TMS.MCP.Helpers,
   TMS.MCP.Transport.StreamableHTTP,
-  Tool.GerarNFe;
+  Tool.GerarNFe,
+  Tool.ReenviarNFe;
 
 type
   TServer = class
@@ -18,6 +19,7 @@ type
     FMCPServer: TTMSMCPServer;
     FHTTPTransport: TTMSMCPStreamableHTTPTransport;
     FToolGerarNFe: TToolGerarNFe;
+    FToolReenviarNFE: TToolReenviarNFE;
     procedure OnServerLog(Sender: TObject; const LogMessage: string);
   public
     constructor Create;
@@ -44,10 +46,12 @@ begin
   FMCPServer.Transport := FHTTPTransport;
 
   FToolGerarNFe := TToolGerarNFe.Create(FMCPServer);
+  FToolReenviarNFE := TToolReenviarNFE.Create(FMCPServer);
 end;
 
 destructor TServer.Destroy;
 begin
+  FToolReenviarNFE.Free;
   FToolGerarNFe.Free;
   FHTTPTransport.Free;
   FMCPServer.Free;
@@ -73,6 +77,7 @@ end;
 procedure TServer.SetupServer;
 begin
   FToolGerarNFe.Processar;
+  FToolReenviarNFE.Processar;
 end;
 
 end.
