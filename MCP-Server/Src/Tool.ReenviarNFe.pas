@@ -68,6 +68,8 @@ function TToolReenviarNFe.ReenviarNFe(const Args: array of TValue): TValue;
 var
   LChave: string;
 begin
+  ComponentesDM.ACBrNFe1.NotasFiscais.Clear;
+
   if Length(Args) <= 0 then
   begin
     Result := TValue.From<string>('Chave da NFe não informado');
