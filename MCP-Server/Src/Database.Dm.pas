@@ -51,6 +51,7 @@ type
     QNFeserie: TIntegerField;
     QNFenumero: TIntegerField;
     QPessoasemail: TWideMemoField;
+    QNFeid_destinatario: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
   private
     FSqlPessoas: string;

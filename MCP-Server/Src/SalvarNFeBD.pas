@@ -8,7 +8,8 @@ uses
   ACBrBase,
   ACBrDFe,
   Componentes.DM,
-  Database.Dm;
+  Database.Dm,
+  Destinatario;
 
 type
   TSalvarNFeBD = class
@@ -18,7 +19,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    procedure GravarNFeNoBanco;
+    procedure GravarNFeNoBanco(const ADestinatario: TDestinatario);
   end;
 
 implementation
@@ -35,10 +36,11 @@ begin
   inherited;
 end;
 
-procedure TSalvarNFeBD.GravarNFeNoBanco;
+procedure TSalvarNFeBD.GravarNFeNoBanco(const ADestinatario: TDestinatario);
 begin
   FDm.QNFeGet('');
   FDm.QNFe.Append;
+  FDm.QNFeid_destinatario.AsInteger := ADestinatario.Id;
   FDm.QNFeserie.AsInteger := FACBrNFe.NotasFiscais.Items[0].NFe.Ide.serie;
   FDm.QNFenumero.AsInteger := FACBrNFe.NotasFiscais.Items[0].NFe.Ide.nNF;
   FDm.QNFechave.AsString := FACBrNFe.NotasFiscais.Items[0].NFe.procNFe.chNFe;

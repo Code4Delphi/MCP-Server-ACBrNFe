@@ -23,6 +23,10 @@ object DatabaseDm: TDatabaseDm
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = False
     end
+    object QNFeid_destinatario: TIntegerField
+      FieldName = 'id_destinatario'
+      Origin = 'id_destinatario'
+    end
     object QNFeserie: TIntegerField
       FieldName = 'serie'
       Origin = 'serie'
